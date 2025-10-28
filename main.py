@@ -95,13 +95,6 @@ class TestUrbanRoutes:
         self.page.order_taxi()
         self.page.wait_for_driver()  # opcional
 
-        print("✅ Prueba completada exitosamente: se simuló el flujo completo de pedir un taxi.")
+        print("Prueba completada exitosamente: se simuló el flujo completo de pedir un taxi.")
 
 
-if __name__ == "__main__":
-    test = TestUrbanRoutes()
-    test.setup_method()
-    try:
-        test.test_request_taxi_flow()
-    finally:
-        test.teardown_method()
