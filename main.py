@@ -107,12 +107,24 @@ class TestUrbanRoutes:
         value = self.driver.find_element(*self.page.message_field).get_attribute("value")
         assert message in value, "El mensaje no se escribió correctamente."
 
-    def 
+    def test_request_blanket_and_tissues(self):
         self.page.request_blanket_and_tissues()
-        self.page.request_icecreams(2)
-        self.page.order_taxi()
-        self.page.wait_for_driver()  # opcional
+        assert True, "Manta y pañuelos solicitados correctamente."
 
-        print("Prueba completada exitosamente: se simuló el flujo completo de pedir un taxi.")
+    def test_request_icecreams(self):
+        self.page.request_icecreams(2)
+        assert True, "Helado solicitado correctamente."
+
+    def test_order_taxi(self):
+        self.page.order_taxi()
+        visible = self.page.wait.until(EC.visibility_of_element_located(self.page_modal))
+        assert visible.is_displayed(), "No apareció la información del conductor."
+
+    def test_driver_info(self):
+        self.page.wait_for_driver()
+        visible = self.page.wait.until(EC.visibility_of_element_located(self.page.driver_modal))
+        assert visible.is_displayed(), "No aparecio la información del conductor"
+
+print("Pruebas completada exitosamente: se simuló el flujo completo de pedir un taxi.")
 
 
