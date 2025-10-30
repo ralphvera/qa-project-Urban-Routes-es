@@ -86,10 +86,28 @@ class TestUrbanRoutes:
 
     def test_request_taxi_flow(self):
         self.page.set_route("Av. Insurgentes 300", "Zócalo CDMX")
+
+    def test_select_comfor(self):
         self.page.select_comfort()
+        selected = self.driver.find_element(*self.page.comfort_tariff).get_attribute("class")
+        assert "active" in selected, "No se seleccionó la tarifa de comfort correctamente."
+
+    def test_fill_phone(self):
         self.page.fill_phone("5555555555")
+        value = self.driver.find_element(*self.page.phone_field).get_attribute("value")
+        assert value == "5555555555", "El número de teléfono no se ingresó correctamente."
+
+    def test_add_credit_card(self):
         self.page.add_card("4111111111111111", "123")
-        self.page.write_message("Por favor, venga despacio, llevo equipaje.")
+        assert True, "Se agregó la tarjeta."
+
+    def test_write_message(self):
+        message = "Por favor, venga despacio, llevo equipaje."
+        self.page.write_message(message)
+        value = self.driver.find_element(*self.page.message_field).get_attribute("value")
+        assert message in value, "El mensaje no se escribió correctamente."
+
+    def 
         self.page.request_blanket_and_tissues()
         self.page.request_icecreams(2)
         self.page.order_taxi()
