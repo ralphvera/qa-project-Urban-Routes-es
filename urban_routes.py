@@ -33,15 +33,27 @@ class UrbanRoutesPage:
         self.wait.until(EC.visibility_of_element_located(self.from_field)).send_keys(from_address)
         self.wait.until(EC.visibility_of_element_located(self.to_field)).send_keys(to_address + Keys.ENTER)
 
+    def get_from(self):
+        return self.wait.until(EC.visibility_of_element_located(self.from_field)).get_property('value')
+
+    def get_to(self):
+        return self.driver.find_element(*self.to_field).get_property('value')
+
     def select_comfort(self):
         self.wait.until(EC.element_to_be_clickable(self.order_taxi)).click()
         self.wait.until(EC.element_to_be_clickable(self.comfort_tariff_button)).click()
+
+    def get_confort_tariff_class(self):
+        return self.driver.find_element(*self.comfort_tariff_button).get_attribute("class")
 
     def fill_phone(self, phone):
         self.wait.until(EC.element_to_be_clickable(self.phone_button)).click()
         field = self.wait.until(EC.visibility_of_element_located(self.phone_input))
         field.send_keys(phone)
         self.wait.until(EC.element_to_be_clickable(self.phone_submit)).click()
+
+    def fill_sms_code(self, sms_code):
+        self.wait.until(EC.element_to_be_clickable(self.phone_button)).click()
 
     def add_card(self, number, cvv):
         self.wait.until(EC.element_to_be_clickable(self.payment_method)).click()
