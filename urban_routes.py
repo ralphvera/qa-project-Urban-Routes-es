@@ -3,11 +3,15 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+import data
+
 
 class UrbanRoutesPage:
     def __init__(self, driver):
+
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
+        self.driver.get(data.urban_routes_url)
 
         # --- Localizadores ---
         self.from_field = (By.ID, "from")
@@ -17,8 +21,8 @@ class UrbanRoutesPage:
         self.phone_button = (By.CSS_SELECTOR, ".np-button")
         self.phone_input = (By.ID, "phone")
         self.phone_submit = (By.CSS_SELECTOR, "#root > div > div.number-picker.open > div.modal > div.section.active > form > div.buttons > button")
-        self.payment_method = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div[2]/div[2]/div[1]')
-        self.card_add_button = (By.CSS_SELECTOR, "#root > div > div.payment-picker.open > div.modal > div.section.active > div.pp-selector > div.pp-row.disabled > div.pp-title")
+        self.payment_method = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div[2]/div[2]/div[2]')
+        self.card_add_button = (By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]')
         self.card_number_input = (By.ID, "number")
         self.card_code_input = (By.ID, "code")
         self.card_link_button = (By.CSS_SELECTOR, "button.link")

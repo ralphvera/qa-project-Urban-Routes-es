@@ -13,10 +13,12 @@ class TestUrbanRoutes:
     # ESTE METODO FUNCIONA PARA SELENIUM >= 4.6
     @classmethod
     def setup_class(cls):
+        print("Inicializando ChromeDriver...")
         from selenium.webdriver.chrome.options import Options
         chrome_options = Options()
-        chrome_options.set_capability("goog:loggingPrefs", {'performance': 'ALL'})
+        # chrome_options.set_capability("goog:loggingPrefs", {'performance': 'ALL'})
         cls.driver = webdriver.Chrome(options=chrome_options)
+        print("ChromeDriver iniciado correctamente")  # DEBUG
         cls.driver.implicitly_wait(10)
         cls.driver.maximize_window()
         cls.page = UrbanRoutesPage(cls.driver)
@@ -33,9 +35,9 @@ class TestUrbanRoutes:
         assert "active" in self.page.get_confort_tariff_class() or "tcard-price" in  self.page.get_confort_tariff_class()
 
     def test_fill_phone(self):
-        page.fill_phone(data.phone_number)
+        self.page.fill_phone(data.phone_number)
         # Verificamos que el modal del teléfono se haya cerrado
-        assert not page.driver.find_elements(*page.phone_input)
+        assert not self.page.driver.find_elements(*self.page.phone_input)
         sms_code = helpers.retrieve_phone_code(self.driver)
         self.page.fill_sms_code(sms_code)
 
