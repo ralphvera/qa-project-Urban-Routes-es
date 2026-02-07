@@ -21,6 +21,7 @@ class UrbanRoutesPage:
         self.phone_button = (By.CSS_SELECTOR, ".np-button")
         self.phone_input = (By.ID, "phone")
         self.phone_submit = (By.CSS_SELECTOR, "#root > div > div.number-picker.open > div.modal > div.section.active > form > div.buttons > button")
+       # self.phone_sms_code = (By.XPATH, '/html/body/div/div/div[1]/div[2]/div[2]/form/div[1]/div[1]/input')
         self.payment_method = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div[2]/div[2]/div[2]')
         self.card_add_button = (By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]')
         self.card_number_input = (By.ID, "number")
@@ -56,8 +57,16 @@ class UrbanRoutesPage:
         field.send_keys(phone)
         self.wait.until(EC.element_to_be_clickable(self.phone_submit)).click()
 
+    #def fill_sms_code(self, sms_code):
+        #self.wait.until(EC.element_to_be_clickable(self.phone_button)).click()
+
     def fill_sms_code(self, sms_code):
-        self.wait.until(EC.element_to_be_clickable(self.phone_button)).click()
+        self.sms_input = (By.XPATH, '/html/body/div/div/div[1]/div[2]/div[2]/form/div[1]/div[1]/input')
+        sms_input = self.wait.until(
+            EC.visibility_of_element_located(self.sms_input)
+        )
+        sms_input.send_keys(sms_code)
+
 
     def add_card(self, number, cvv):
         self.wait.until(EC.element_to_be_clickable(self.payment_method)).click()

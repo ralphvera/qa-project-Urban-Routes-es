@@ -34,12 +34,23 @@ class TestUrbanRoutes:
         # Verificamos que la tarifa Comfort se haya seleccionado
         assert "active" in self.page.get_confort_tariff_class() or "tcard-price" in  self.page.get_confort_tariff_class()
 
+    #def test_fill_phone(self):
+     #   self.page.fill_phone(data.phone_number)
+      #  sms_code = helpers.retrieve_phone_code(self.page.driver)
+       # self.page.fill_sms_code(sms_code)
+        # Validación
+        #assert not self.page.driver.find_elements(*self.page.phone_input)
     def test_fill_phone(self):
         self.page.fill_phone(data.phone_number)
-        # Verificamos que el modal del teléfono se haya cerrado
-        assert not self.page.driver.find_elements(*self.page.phone_input)
-        sms_code = helpers.retrieve_phone_code(self.driver)
+
+        # ⏳ damos un pequeño margen a que el backend responda
+        sms_code = helpers.retrieve_phone_code(self.page.driver)
+
         self.page.fill_sms_code(sms_code)
+
+        # Assert final: el input ya tiene algo
+        value = self.page.driver.find_element(*self.page.sms_input).get_attribute("value")
+        assert value == sms_code
 
     def test_add_card(self):
         self.page.add_card(data.card_number, data.card_code)

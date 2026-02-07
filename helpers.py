@@ -6,6 +6,7 @@ def retrieve_phone_code(driver) -> str:
     import json
     import time
     from selenium.webdriver.common import WebDriverException
+    from selenium.common.exceptions import WebDriverException
     code = None
     for i in range(10):
         try:
@@ -22,4 +23,10 @@ def retrieve_phone_code(driver) -> str:
         if not code:
             raise Exception("No phone confirmation code found.\n"
                             "Please use retrieve_phone_code only after the code was requested in your application.")
+       #The following is just an added bonus in case anything goes wrong
+        if not code:
+            raise Exception(
+                "SMS code was not captured from network logs. "
+                "Make sure retrieve_phone_code is called AFTER requesting the phone number."
+            )
         return code
