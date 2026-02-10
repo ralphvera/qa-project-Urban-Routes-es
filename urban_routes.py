@@ -65,6 +65,7 @@ class UrbanRoutesPage:
         sms_input = self.wait.until(
             EC.visibility_of_element_located(self.sms_input)
         )
+
         sms_input.send_keys(sms_code)
 
 

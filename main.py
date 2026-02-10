@@ -43,10 +43,11 @@ class TestUrbanRoutes:
     def test_fill_phone(self):
         self.page.fill_phone(data.phone_number)
 
-        # ⏳ damos un pequeño margen a que el backend responda
+        # damos un pequeño margen a que el backend responda
         sms_code = helpers.retrieve_phone_code(self.page.driver)
 
         self.page.fill_sms_code(sms_code)
+        print("SMS CODE:", sms_code)
 
         # Assert final: el input ya tiene algo
         value = self.page.driver.find_element(*self.page.sms_input).get_attribute("value")
