@@ -10,6 +10,5 @@ Se define primero dos clases, una llamada UrbanRoutesPage y otra llamada TestUrb
 La primera consiste en definir los elementos de la página que serán parte del objeto
 de prueba y la segunda se centra en definir las pruebas automatizadas a realizar.
 
-
-Duda si es que alguien lee esto, el texto para verificar el código con un sms no sirve, en la prueba
-debo de cerrar el cuadro de diálogo para considerar el test case exitoso?
+El mayor reto de este sprint fue, definitvamente, obtener el codigo de respuesta de la solicitud de
+cuando el usuario introduce su numero telefonico y necesitas validarlo con el código sms. Good riddance sprint 9.
