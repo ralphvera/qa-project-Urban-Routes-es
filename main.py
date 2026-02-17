@@ -1,9 +1,17 @@
-import pytest
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import helpers as helpers
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
+
+driver = webdriver.Chrome(options=chrome_options)
+
+
 
 import data
 from urban_routes import UrbanRoutesPage
@@ -16,7 +24,7 @@ class TestUrbanRoutes:
         print("Inicializando ChromeDriver...")
         from selenium.webdriver.chrome.options import Options
         chrome_options = Options()
-        # chrome_options.set_capability("goog:loggingPrefs", {'performance': 'ALL'})
+        chrome_options.set_capability("goog:loggingPrefs", {'performance': 'ALL'})
         cls.driver = webdriver.Chrome(options=chrome_options)
         print("ChromeDriver iniciado correctamente")  # DEBUG
         cls.driver.implicitly_wait(10)
@@ -42,6 +50,7 @@ class TestUrbanRoutes:
         #assert not self.page.driver.find_elements(*self.page.phone_input)
     def test_fill_phone(self):
         self.page.fill_phone(data.phone_number)
+        time.sleep(2)
 
         # damos un pequeño margen a que el backend responda
         sms_code = helpers.retrieve_phone_code(self.page.driver)
@@ -56,6 +65,7 @@ class TestUrbanRoutes:
     def test_add_card(self):
         self.page.add_card(data.card_number, data.card_code)
         # Verificamos que el botón de agregar tarjeta desapareció (ya se agregó)
+        time.sleep(1) #Esperamos a que el UI se actualice
         assert not self.page.driver.find_elements(*self.page.card_add_button)
 
     def test_write_message(self):
