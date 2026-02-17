@@ -32,9 +32,9 @@ class UrbanRoutesPage:
         self.card_exit_button = (By.XPATH, '//*[@id="root"]/div/div[2]/div[2]/div[1]/button')
         self.message_input = (By.ID, "comment")
         self.blanket_checkbox = (By.CSS_SELECTOR, '#root > div > div.workflow > div.workflow-subcontainer > div.tariff-picker.shown > div.form > div.reqs.open > div.reqs-body > div:nth-child(1) > div > div.r-sw > div > span')
-        self.ice_cream_plus_button = (By.CSS_SELECTOR, '#root > div > div.workflow > div.workflow-subcontainer > div.tariff-picker.shown > div.form > div.reqs.open > div.reqs-body > div.r.r-type-group > div > div.r-group-items > div:nth-child(1) > div > div.r-counter > div > div.counter-plus.disabled')
-        self.order_button = (By.CSS_SELECTOR, "#root > div > div.workflow > div.smart-button-wrapper > button > span.smart-button-secondary")
-        self.driver_modal = (By.CSS_SELECTOR, ".order-body .driver-info")
+        self.ice_cream_plus_button = (By.CSS_SELECTOR, '#root > div > div.workflow > div.workflow-subcontainer > div.tariff-picker.shown > div.form > div.reqs.open > div.reqs-body > div.r.r-type-group > div > div.r-group-items > div:nth-child(1) > div > div.r-counter > div > div.counter-plus')
+        self.order_button = (By.CSS_SELECTOR, '#root > div > div.workflow > div.smart-button-wrapper > button')
+        self.driver_modal = (By.CSS_SELECTOR, '#root > div > div.order.shown > div.order-body')
 
     # --- Métodos de acción ---
     def set_route(self, from_address, to_address):
@@ -141,7 +141,7 @@ class UrbanRoutesPage:
         for _ in range(qty):
             plus.click()
 
-    def order_taxi(self):
+    def order_taxi_button(self):
         self.wait.until(EC.element_to_be_clickable(self.order_button)).click()
 
     def wait_for_driver(self):
