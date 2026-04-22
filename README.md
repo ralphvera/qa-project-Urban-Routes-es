@@ -12,3 +12,11 @@ de prueba y la segunda se centra en definir las pruebas automatizadas a realizar
 
 El mayor reto de este sprint fue, definitvamente, obtener el codigo de respuesta de la solicitud de
 cuando el usuario introduce su numero telefonico y necesitas validarlo con el código sms. Good riddance sprint 9.
+
+Las principales herramientas usadas fueron:
+  - Python
+  - Selenium
+  - Postman
+  - Chrome Dev Tools
+  - Pycharm
+  - Git
